@@ -32,9 +32,14 @@ db = TinyDB(dbfname)
 
 #region Tweepy
 api = tweepy.API(auth)
+COUNT = int(parser.get("app","TWEET_COUNT"))
 
 class StdOutListener(tweepy.StreamListener):
 
+    def __init__(self,count,exithook=None):
+        tweepy.StreamListener.__init__(self)
+        self.count = count
+        self.counthook = exithook
     hash_tags = re.compile(ur"[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+",re.UNICODE)
 
     @staticmethod
@@ -62,7 +67,7 @@ class StdOutListener(tweepy.StreamListener):
     def on_error(self, status):
         print status
     def on_status(self,status):
-        if status.user.lang == u"ja":
+        if status.user.lang == u"ja" and self.countDown():
             tags = status.entities["hashtags"]
             text = StdOutListener.strip_all_entities(StdOutListener.strip_links(status.text))
             print text
@@ -71,12 +76,21 @@ class StdOutListener(tweepy.StreamListener):
             dic["text"] = text
             dic["tags"] = tags
             db.insert(dic)
-            
+
+    def countDown(self):
+        if self.count <= 0:
+            if self.counthook != None : self.counthook()
+            return False
+        else:
+            self.count -= 1
+            return True
+def exit():
+    sys.exit()            
 
 if __name__ == '__main__':
     searchword = None
     if len(sys.argv) > 1: searchword = sys.argv[1].decode("utf-8")
-    l = StdOutListener()
+    l = StdOutListener(COUNT,exit)
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
     stream = tweepy.Stream(auth, l)

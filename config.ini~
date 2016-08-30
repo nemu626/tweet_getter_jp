@@ -1,0 +1,25 @@
+[app]
+TWEET_COUNT :   10
+
+[user]
+OWNER_NAME  :   Narugal_ove
+OWNER_ID    :   86734535
+
+[apikey]
+CONSUMER_KEY    :   SVGqL4lAppRcw4EpBrCGdiCTz
+CONSUMER_SECRET :   IHPgHRDMEJDmwImQID38qPNRO5JAaY0l2d1bopcd5JolWFRz9a
+
+[accesstoken]
+ACCESS_TOKEN    :   86734535-JF7pzLHEk082cohhpdhI2yd8VWla7c3t7Uupb5qTX
+ACCESS_SECRET   :   C1x07UuSbkD7dr2Hz8Vpl3aHNLIeDT1RMK1y3hItoaGg6
+
+[apiurl]
+APP_AUTH    :   https://api.twitter.com/oauth2/token
+REQ_TOKEN   :   https://api.twitter.com/oauth/request_token
+AUTH_URL    :   https://api.twitter.com/oauth/authorize
+ACCESS_TOKEN:   https://api.twitter.com/oauth/access_token
+
+[output]
+BASE_DIR    :   ./output/
+DB_FNAME    :   db.json   
+TWEET_FNAME :   tweets.txt
