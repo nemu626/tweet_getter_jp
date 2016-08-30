@@ -73,10 +73,16 @@ class StdOutListener(tweepy.StreamListener):
             db.insert(dic)
             
 
+if __name__ == '__main__':
+    searchword = None
+    if len(sys.argv) > 1: searchword = sys.argv[1].decode("utf-8")
+    l = StdOutListener()
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+    stream = tweepy.Stream(auth, l)
 
-l = StdOutListener()
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_secret)
-stream = tweepy.Stream(auth, l)
-stream.filter(track=['#'])
-#endregion
+    if searchword:
+        stream.filter(track=[searchword])
+    else:
+        stream.sample()
+    #endregion
