@@ -5,10 +5,9 @@ import sys
 import ConfigParser
 import re,string
 from tinydb import TinyDB, Query
+import os
 
-#region - DataBase Setting
-db = TinyDB("db.json")
-#endregion
+
 
 #region - Import Config
 parser = ConfigParser.SafeConfigParser()
@@ -22,6 +21,13 @@ userid = parser.get("user","OWNER_ID")
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
+#endregion
+
+#region - DataBase Setting
+if not os.path.exists(parser.get("output","BASE_DIR")):
+    os.mkdir(parser.get("output","BASE_DIR"))
+dbfname = parser.get("output","BASE_DIR") + parser.get("output","DB_FNAME")
+db = TinyDB(dbfname)
 #endregion
 
 #region Tweepy
