@@ -11,7 +11,7 @@ import os
 
 #region - Import Config
 parser = ConfigParser.SafeConfigParser()
-parser.read("./config.ini")
+parser.read("./account.ini")
 
 consumer_key = parser.get("apikey","CONSUMER_KEY")
 consumer_secret = parser.get("apikey","CONSUMER_SECRET")
@@ -24,6 +24,7 @@ auth.set_access_token(access_token, access_secret)
 #endregion
 
 #region - DataBase Setting
+parser.read("./config.ini")
 if not os.path.exists(parser.get("output","BASE_DIR")):
     os.mkdir(parser.get("output","BASE_DIR"))
 dbfname = parser.get("output","BASE_DIR") + parser.get("output","DB_FNAME")
