@@ -1,0 +1,11 @@
+[user]
+OWNER_NAME  :   Sample_User
+OWNER_ID    :   12345678
+
+[apikey]
+CONSUMER_KEY    :   YouRCoNsuMerKeYIshEre
+CONSUMER_SECRET :   YourCONSumErSEcREtiSHeRe
+
+[accesstoken]
+ACCESS_TOKEN    :   YoURACEESSToKENISHERe
+ACCESS_SECRET   :   YOurAccESSTokENSecRetISHere
