@@ -23,3 +23,4 @@ done
 #write a tweet textfile from db json file 
 python db2file.py
 rm ./output/db.json
+deactivate
