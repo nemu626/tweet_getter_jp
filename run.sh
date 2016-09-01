@@ -11,10 +11,10 @@ then
 fi
 echo "activate virtualenv & pip install "
 source ./venv/bin/activate
-pip install -r requirement.txt
+pip install -r requirements.txt
 
 #run
-for i in 'seq 1 $1'
+for i in $(seq 1 $1)
 do
     python gettweet.py $2
     wait

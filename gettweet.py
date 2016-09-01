@@ -68,9 +68,9 @@ class StdOutListener(tweepy.StreamListener):
     def on_error(self, status):
         print status
     def on_status(self,status):
-        if status.user.lang == u"ja" and self.countDown():
+        text = StdOutListener.strip_all_entities(StdOutListener.strip_links(status.text))
+        if status.user.lang == u"ja" and len(text) > 20 and (not text.startswith(u"RT")) and self.countDown():
             tags = status.entities["hashtags"]
-            text = StdOutListener.strip_all_entities(StdOutListener.strip_links(status.text))
             print text
 
             dic = {}
